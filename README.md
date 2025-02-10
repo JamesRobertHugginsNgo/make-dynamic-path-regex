@@ -1,7 +1,7 @@
 # make-dynamic-path-regex
 
 - [Boilerplate](src/script.js)
-- [Sample Page](sample/sample.js)
+- [Sample Page](sample/sample.html)
 
 ## Alternate Views
 
