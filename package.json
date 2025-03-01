@@ -2,12 +2,27 @@
   "name": "make-dynamic-path-regex",
   "version": "1.0.1",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
-  "author": "James Robert Huggins Ngo",
   "license": "MIT",
-  "type": "module"
+  "author": {
+    "name": "James Robert Huggins Ngo",
+    "email": "jamesroberthugginsngo@gmail.com",
+    "url": "https://jamesroberthugginsngo.github.io"
+  },
+  "type": "module",
+  "main": "./src/make-dynamic-path-regex.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/make-dynamic-path-regex.d.ts",
+      "default": "./dist/make-dynamic-path-regex.js"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && prettier --write ./dist/*.[jt]s"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.1",
+    "typescript": "^5.7.3"
+  }
 }

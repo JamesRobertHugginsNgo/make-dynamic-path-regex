@@ -4,11 +4,84 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Sample - make-dynamic-path-regex</title>
+	<link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-	<script type="module" src="./script.js"></script>
+	<main class="page-width">
+		<h1>Sample - make-dynamic-path-regex</h1>
+
+		<p>The following content is dynamically generated which can be viewed in the web page's source code.</p>
+	</main>
+
+	<script type="module">
+		import makeDynamicPathRegex from '../dist/make-dynamic-path-regex.js';
+		import CodeDisplay from './code-display.js';
+
+		const codeDisplay = new CodeDisplay(document.querySelector('main'));
+
+		codeDisplay.insert(
+			'Static Path',
+			'Generate regular expression from a static path.',
+			() => {
+				const path = '/home/folder';
+				const regex = makeDynamicPathRegex(path);
+				const value = '/home/folder';
+
+				return {
+					source: regex.source,
+					exec: regex.exec(value),
+					test: regex.test(value)
+				};
+			}
+		);
+
+		codeDisplay.insert(
+			'Required Dynamic Path',
+			'Generate regular expression from a dynamic path with required part.',
+			() => {
+				const path = '/home/:work/folder';
+				const regex = makeDynamicPathRegex(path);
+				const value = '/home/opensource/folder';
+
+				return {
+					source: regex.source,
+					exec: regex.exec(value),
+					test: regex.test(value)
+				};
+			}
+		);
+
+		codeDisplay.insert(
+			'Optional Dynamic Path',
+			'Generate regular expression from a dynamic path with optional part.',
+			() => {
+				const path = '/home/folder/:id?';
+				const regex = makeDynamicPathRegex(path);
+
+				const value1 = '/home/folder';
+				const value2 = '/home/folder/0999123';
+				const value3 = '/home/folder/0999123/';
+
+				return {
+					source: regex.source,
+					value1: {
+						exec: regex.exec(value1),
+						test: regex.test(value1),
+					},
+					value2: {
+						exec: regex.exec(value2),
+						test: regex.test(value2),
+					},
+					value3: {
+						exec: regex.exec(value3),
+						test: regex.test(value3)
+					}
+				};
+			}
+		);
+	</script>
 </body>
 
 </html>
